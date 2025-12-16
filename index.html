@@ -72,6 +72,25 @@
       padding: 3rem 2.5rem;
     }
 
+    /* Header row - title left, info right */
+    .header-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+
+    /* Top-right info box */
+    .info-box {
+      text-align: right;
+      font-size: 0.9rem;
+    }
+
+    .info-box p {
+      margin: 0.25rem 0;
+    }
+
     /* Chrome/Silver Border Container */
     .chrome-border {
       position: relative;
@@ -84,8 +103,8 @@
     .chrome-border::before {
       content: '';
       position: absolute;
-      inset: -8px;
-      border-radius: 18px;
+      inset: -4px;
+      border-radius: 16px;
       background: linear-gradient(
         135deg,
         #e8e8e8 0%,
@@ -101,20 +120,9 @@
         #e8e8e8 100%
       );
       background-size: 200% 200%;
-      animation: chrome-shift 16s ease-in-out infinite;
+      background-position: var(--x, 50%) var(--y, 50%);
+      transition: background-position 0.15s ease-out;
       z-index: -1;
-    }
-
-    @keyframes chrome-shift {
-      0% {
-        background-position: 0% 0%;
-      }
-      50% {
-        background-position: 100% 100%;
-      }
-      100% {
-        background-position: 0% 0%;
-      }
     }
 
     /* Responsive - mobile */
@@ -150,6 +158,14 @@
       .main-content {
         padding: 1.5rem;
       }
+
+      .header-row {
+        flex-direction: column;
+      }
+
+      .info-box {
+        text-align: left;
+      }
     }
   </style>
 </head>
@@ -163,10 +179,48 @@
   </nav>
 
   <main class="main-content">
-    <div class="chrome-border">
-      <h1>Caiden Kennedy</h1>
-      <p>Sales workflow Automation engineer</p>
+    <div class="header-row">
+      <div class="chrome-border">
+        <h1>Caiden Kennedy</h1>
+        <p>Sales workflow Automation engineer</p>
+      </div>
+
+      <div class="chrome-border info-box">
+        <p>Minneapolis, MN</p>
+        <p>cdkennedy45@gmail.com</p>
+        <a href="https://www.linkedin.com/in/caidenkennedy/" target="_blank" class="nav-link">LinkedIn</a>
+      </div>
+    </div>
+
+    <div class="chrome-border" style="margin-top: 4rem; max-width: 500px;">
+      <h2>About Me</h2>
+      <p style="margin-top: 0.75rem;">
+        Computer Science student at the University of St. Thomas, graduating December 2025. 
+        Currently building AI-powered sales intelligence systems at MaiaEdge, where I design 
+        automation workflows that turn hours of manual research into minutes.
+      </p>
+      <p style="margin-top: 0.75rem;">
+        I'm passionate about the intersection of technical problem-solving and business impact—turning 
+        complex tools into solutions that actually help people. Looking for opportunities in sales 
+        engineering, solutions architecture, and technical pre-sales.
+      </p>
+      <p style="margin-top: 0.75rem;">
+        When I'm not coding, you'll find me caring for my collection of houseplants or hunting 
+        for vintage audio equipment.
+      </p>
     </div>
   </main>
+
+  <script>
+    document.addEventListener('mousemove', (e) => {
+      const x = (e.clientX / window.innerWidth) * 100;
+      const y = (e.clientY / window.innerHeight) * 100;
+      
+      document.querySelectorAll('.chrome-border').forEach(el => {
+        el.style.setProperty('--x', x + '%');
+        el.style.setProperty('--y', y + '%');
+      });
+    });
+  </script>
 </body>
 </html>
